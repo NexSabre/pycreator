@@ -1,5 +1,7 @@
 import os
 
+from pycreator.framework.messages import Messages
+
 from pycreator.actions.action import Action
 from pycreator.core import create_folders
 
@@ -14,6 +16,8 @@ class CreateAction(Action):
 
     def process_action(self, configuration):
         target_location = configuration.location if configuration.location else os.getcwd()
+        if self.check_app_exists(target_location, configuration.name):
+            exit(1)
         self.create_boilerplate(target_location, configuration.name)
 
     @staticmethod
@@ -26,3 +30,11 @@ class CreateAction(Action):
         )
         for step in initial_steps:
             step(tgt_location, app_name)
+
+    @staticmethod
+    def check_app_exists(tgt_location: str, app_name: str):
+        potential_app_location = os.path.join(tgt_location, app_name)
+        if os.path.exists(potential_app_location) and os.path.isdir(potential_app_location):
+            Messages.error(f"Application {app_name} exist at {tgt_location}. Choose different name or location.")
+            return True
+        return False
