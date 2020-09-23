@@ -18,18 +18,27 @@ class CreateAction(Action):
         target_location = configuration.location if configuration.location else os.getcwd()
         if self.check_app_exists(target_location, configuration.name):
             exit(1)
-        self.create_boilerplate(target_location, configuration.name)
+        if not self.create_boilerplate(target_location, configuration.name):
+            Messages.error(f"Some error occur. The pycreator does not create an application {configuration.name}"
+                           f"at {target_location}")
+        Messages.ok(f"The pycreator successfully create a new application {configuration.name}"
+                    f"at {target_location}")
 
     @staticmethod
     def create_boilerplate(tgt_location: str, app_name: str):
-        initial_steps = (
-            create_folders.create_application_dirs,
-            create_folders.create_inits,
-            create_folders.create_additional_files,
-            create_folders.create_files_from_templates
-        )
-        for step in initial_steps:
-            step(tgt_location, app_name)
+        try:
+            initial_steps = (
+                create_folders.create_application_dirs,
+                create_folders.create_inits,
+                create_folders.create_additional_files,
+                create_folders.create_files_from_templates
+            )
+            for step in initial_steps:
+                step(tgt_location, app_name)
+        except Exception as e:
+            print(e)
+            return False
+        return True
 
     @staticmethod
     def check_app_exists(tgt_location: str, app_name: str):
