@@ -2,7 +2,6 @@ import os
 
 from pycreator.actions.action import Action
 from pycreator.core import create_folders
-from pycreator.framework.messages import Messages
 
 
 class CreateAction(Action):
@@ -15,11 +14,15 @@ class CreateAction(Action):
 
     def process_action(self, configuration):
         target_location = configuration.location if configuration.location else os.getcwd()
+        self.create_boilerplate(target_location, configuration.name)
 
-        # # if os.path.exists(os.path.join(target_location, configuration.name)):
-        # #     Messages.error(f"Application with such a name {configuration.name} exists")
-        # #     raise
-        create_folders.create_application_dirs(location=target_location, app_name=configuration.name)
-        create_folders.create_inits(location=target_location, app_name=configuration.name)
-        create_folders.create_additional_files(location=target_location, app_name=configuration.name)
-        create_folders.create_files_from_templates(target_location, configuration.name)
+    @staticmethod
+    def create_boilerplate(tgt_location: str, app_name: str):
+        initial_steps = (
+            create_folders.create_application_dirs,
+            create_folders.create_inits,
+            create_folders.create_additional_files,
+            create_folders.create_files_from_templates
+        )
+        for step in initial_steps:
+            step(tgt_location, app_name)
