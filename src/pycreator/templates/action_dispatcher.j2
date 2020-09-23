@@ -1,0 +1,23 @@
+from argparse import ArgumentParser
+
+from {{ creator_app_name }}.actions.example_action import ExampleAction
+from {{ creator_app_name }}.actions.version import ShowVersion
+from {{ creator_app_name }}.framework.messages import Messages
+
+
+class ActionDispatcher:
+    ACTION_HANDLERS = [ExampleAction, ShowVersion]
+
+    def __init__(self):
+        self.parser = ArgumentParser()
+        subparsers = self.parser.add_subparsers()
+        self.action_handlers = {action_handler.ACTION: action_handler(subparsers) for action_handler in
+                                self.ACTION_HANDLERS}
+
+    def process_application(self):
+        configuration = self.parser.parse_args()
+        try:
+            self.action_handlers[configuration.ACTION].process_action(configuration)
+        except AttributeError:
+            Messages.clean("pycreator ::")
+

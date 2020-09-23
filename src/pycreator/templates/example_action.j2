@@ -1,0 +1,9 @@
+from {{ creator_app_name }}.actions.action import Action
+
+
+class {{ creator_class_name }}(Action):
+    ACTION = "{{ creator_class_name_action }}"
+    PARAM_NAME = "ACTION"
+
+    def process_action(self, configuration):
+        print("Hello I'm {{ creator_class_name }}")
