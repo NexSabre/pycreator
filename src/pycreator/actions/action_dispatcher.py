@@ -1,12 +1,13 @@
 from argparse import ArgumentParser
 
 from pycreator.actions.create.create_action import CreateAction
+from pycreator.actions.goes.goes_action import GoesAction
 from pycreator.actions.version import ShowVersion
 from pycreator.framework.messages import Messages
 
 
 class ActionDispatcher:
-    ACTION_HANDLERS = [CreateAction, ShowVersion]
+    ACTION_HANDLERS = [CreateAction, GoesAction, ShowVersion]
 
     def __init__(self):
         self.parser = ArgumentParser()
@@ -19,10 +20,9 @@ class ActionDispatcher:
         try:
             self.action_handlers[configuration.ACTION].process_action(configuration)
         except AttributeError:
-            Messages.clean("pycreator ::")
-            Messages.clean("quick tool for pip -> spack package conversion\n")
+            Messages.clean("pycreator")
+            Messages.clean("quick tool to create a Python cmd boilerplate application\n")
             Messages.clean("Choose operation:"
                            "\n\t\t - create -- for creation a new package"
-                           "\n\t\t - update -- for update a existing package.py")
+                           "\n\t\t - goes   -- for brrrr")
             Messages.clean("")
-            Messages.info("All information are base on the pypi.org")
