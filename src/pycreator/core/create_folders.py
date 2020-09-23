@@ -40,7 +40,7 @@ def create_additional_files(location, app_name: str):
     import os
     internal_paths = (
         "README.md",
-        "VERSION.md",
+        "VERSION",
         "LICENSE.md"
     )
 
