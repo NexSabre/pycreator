@@ -17,12 +17,12 @@ class ActionDispatcher:
 
     def process_application(self):
         configuration = self.parser.parse_args()
-        # try:
-        self.action_handlers[configuration.ACTION].process_action(configuration)
-        # except AttributeError:
-        #     Messages.clean("pycreator")
-        #     Messages.clean("quick tool to create a Python cmd boilerplate application\n")
-        #     Messages.clean("Choose operation:"
-        #                    "\n\t\t - create -- for creation a new package"
-        #                    "\n\t\t - goes   -- for brrrr")
-        #     Messages.clean("")
+        try:
+            self.action_handlers[configuration.ACTION].process_action(configuration)
+        except AttributeError:
+            Messages.clean("pycreator")
+            Messages.clean("quick tool to create a Python cmd boilerplate application\n")
+            Messages.clean("Choose operation:"
+                           "\n\t\t - create -- for creation a new package"
+                           "\n\t\t - goes   -- for brrrr")
+            Messages.clean("")
