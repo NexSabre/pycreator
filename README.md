@@ -7,7 +7,17 @@ pip install pycreator       # to install pycreator
 pycreator goes -n brrr      # where brr is the name
 ```
 
-It create a command line, Python application with structure:
+## Usage
+
+### create
+This command allow to create a Python boilerplate application with the structure as showed below.
+Available commands for `create`:
+```
+-n, --name      -- application name (required)
+-l, --location  -- location to create a new package. If none it will create at working directory
+```
+
+Structure of example application named `brrr`
 ```
 brrr
 │   LICENSE.md
@@ -40,3 +50,12 @@ brrr
                 main.py
                 __init__.py
 ```
+
+## Build
+Boilerplate app comes with preconfigured `setup.py` file which allow to create a `.whl` package.
+To build a package, go to `src` dir a type in the terminal:
+```
+pip install setuptools wheel
+python sdist bdist_wheel
+```
+After operation in the newly created dir `dist/` you should find a `*.tar.gz` & `*.whl` packages.
