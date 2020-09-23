@@ -1,0 +1,7 @@
+.idea
+dist/
+build/
+python_wheel_boilerplate.egg-info
+*/dist
+*/build
+*/python_wheel_boilerplate.egg-info
