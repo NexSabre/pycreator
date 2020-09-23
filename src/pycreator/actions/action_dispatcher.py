@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 
-from python_wheel_boilerplate.actions.create.create_action import CreateAction
-from python_wheel_boilerplate.actions.version import ShowVersion
-from python_wheel_boilerplate.framework.messages import Messages
+from pycreator.actions.create.create_action import CreateAction
+from pycreator.actions.version import ShowVersion
+from pycreator.framework.messages import Messages
 
 
 class ActionDispatcher:
@@ -19,7 +19,7 @@ class ActionDispatcher:
         try:
             self.action_handlers[configuration.ACTION].process_action(configuration)
         except AttributeError:
-            Messages.clean("python_wheel_boilerplate ::")
+            Messages.clean("pycreator ::")
             Messages.clean("quick tool for pip -> spack package conversion\n")
             Messages.clean("Choose operation:"
                            "\n\t\t - create -- for creation a new package"

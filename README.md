@@ -1,1 +1,2 @@
-# python_wheel_boilerplate
+# pycreator
+Create boilerplate application thru the command-line!

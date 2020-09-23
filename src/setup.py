@@ -12,14 +12,14 @@ with open("../requirements.txt", "r") as req:
         requirements.append(l.rstrip())
 
 setuptools.setup(
-    name="python_wheel_boilerplate",
+    name="pycreator",
     version=version_number,
     author="Nex Sabre",
     author_email="nexsabre@protonmail.com",
-    description="Automatically create and update a spack package base on the pypi.org information",
+    description="Automatically create a command application",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/NexSabre/python-wheel-boilerplate",
+    url="https://github.com/NexSabre/pycreator",
     packages=setuptools.find_packages(),
     package_data={},
     classifiers=[
@@ -30,7 +30,7 @@ setuptools.setup(
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'python_wheel_boilerplate = python_wheel_boilerplate.main.main:main'
+            'pycreator = pycreator.main.main:main'
         ],
     },
 )

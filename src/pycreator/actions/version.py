@@ -1,4 +1,4 @@
-from python_wheel_boilerplate.actions.action import Action
+from pycreator.actions.action import Action
 
 
 class ShowVersion(Action):
@@ -9,4 +9,4 @@ class ShowVersion(Action):
         pass
 
     def process_action(self, configuration):
-        print("python_wheel_boilerplate: v1.0")
+        print("pycreator: v0.1")

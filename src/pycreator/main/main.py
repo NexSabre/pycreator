@@ -1,4 +1,4 @@
-from python_wheel_boilerplate.actions.action_dispatcher import ActionDispatcher
+from pycreator.actions.action_dispatcher import ActionDispatcher
 
 
 def main():
