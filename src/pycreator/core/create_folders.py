@@ -1,5 +1,7 @@
 from typing import Tuple, Dict
 
+from pycreator.framework.messages import Messages
+
 
 def get_internal_paths(app_name):
     return (
@@ -88,6 +90,7 @@ def create_files_from_templates(location: str, app_name: str):
                  {"creator_app_name": app_name,
                   "creator_class_name": "ExampleAction",
                   "creator_class_name_action": "example"}),
+        Template(("src", app_name), ".pycreator.lock", ".pycreator.j2", {}),
     )
 
     for file_template in files_per_template:
@@ -95,3 +98,29 @@ def create_files_from_templates(location: str, app_name: str):
         with open(path_file_template, 'w') as new_file:
             template = env.get_template(file_template.template_name)
             new_file.write(template.render(**file_template.render_vars))
+
+
+def create_new_action(location_to_actions_dir: str, app_name: str):
+    import os
+    from jinja2 import Environment, PackageLoader, select_autoescape
+    env = Environment(
+        loader=PackageLoader('pycreator', 'templates'),
+        autoescape=select_autoescape(['html', 'xml', 'j2'])
+    )
+
+    file_template = Template((location_to_actions_dir, app_name), f"{app_name}.py", "action.j2",
+                             {"creator_app_name": app_name,
+                              "creator_class_name": f"{app_name[0].upper()}{app_name[1:]}Action",
+                              "creator_class_name_action": app_name})
+
+    if os.path.exists(os.path.join(*(location_to_actions_dir, app_name, *file_template.location))):
+        Messages.error(f"Can't create a new action. Action {app_name} exists")
+        return False
+    os.makedirs(os.path.join(*(location_to_actions_dir, app_name, *file_template.location)))
+
+    path_file_template = os.path.join(
+        *(location_to_actions_dir, app_name, *file_template.location, file_template.dest_name))
+    with open(path_file_template, 'w') as new_file:
+        template = env.get_template(file_template.template_name)
+        new_file.write(template.render(**file_template.render_vars))
+    return True

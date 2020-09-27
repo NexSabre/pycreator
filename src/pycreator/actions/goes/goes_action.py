@@ -2,6 +2,9 @@ from pycreator.actions.create.create_action import CreateAction
 
 
 class GoesAction(CreateAction):
+    """
+    This is a dummy action only to create a link for 'goes' shortcut for the 'create' option.
+    """
     ACTION = "goes"
 
     def fill_parser_arguments(self):

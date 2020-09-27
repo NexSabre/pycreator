@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 
+from pycreator.actions.add.add_action import AddAction
 from pycreator.actions.create.create_action import CreateAction
 from pycreator.actions.goes.goes_action import GoesAction
 from pycreator.actions.version import ShowVersion
@@ -7,7 +8,10 @@ from pycreator.framework.messages import Messages
 
 
 class ActionDispatcher:
-    ACTION_HANDLERS = [CreateAction, GoesAction, ShowVersion]
+    ACTION_HANDLERS = [AddAction,
+                       CreateAction,
+                       GoesAction,
+                       ShowVersion]
 
     def __init__(self):
         self.parser = ArgumentParser()
