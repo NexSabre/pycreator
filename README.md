@@ -17,7 +17,7 @@ Available commands for `create`:
 -l, --location  -- location to create a new package. If none it will create at working directory
 ```
 
-Structure of example application named `brrr`
+Structure of example application named `brrr` (`pycreator create -n brrr`)
 ```
 brrr
 │   LICENSE.md
