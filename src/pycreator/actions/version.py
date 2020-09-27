@@ -9,4 +9,4 @@ class ShowVersion(Action):
         pass
 
     def process_action(self, configuration):
-        print("pycreator: v0.2")
+        print("pycreator: v0.2.1")
