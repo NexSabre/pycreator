@@ -12,14 +12,14 @@ with open("../requirements.txt", "r") as req:
         requirements.append(l.rstrip())
 
 setuptools.setup(
-    name="pycreator",
+    name="{{ creator_app_name}}",
     version=version_number,
-    author="Nex Sabre",
-    author_email="nexsabre@protonmail.com",
-    description="Automatically create a command application",
+    author="",
+    author_email="",
+    description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/NexSabre/pycreator",
+    url="",
     packages=setuptools.find_packages(),
     package_data={},
     classifiers=[
@@ -30,7 +30,7 @@ setuptools.setup(
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'pycreator = pycreator.main.main:main'
+            '{{ creator_app_name}} = {{ creator_app_name }}.main.main:main'
         ],
     },
 )
