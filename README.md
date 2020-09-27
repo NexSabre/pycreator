@@ -63,6 +63,16 @@ New folder `action_name` and `action_name.py` will be created.
 
 _Note:_ Please import a new action in `actions_dispatcher.py` file manually.
 
+New action should be added here, into `ACTION_HANDLERS`
+```
+class ActionDispatcher:
+    ACTION_HANDLERS = [AddAction,
+                       CreateAction,
+                       GoesAction,
+                       ShowVersion]
+                       
+```
+
 ## Build
 Boilerplate app comes with preconfigured `setup.py` file which allow to create a `.whl` package.
 To build a package, go to `src` dir a type in the terminal:
@@ -71,3 +81,5 @@ pip install setuptools wheel
 python setup.py sdist bdist_wheel
 ```
 After operation in the newly created dir `dist/` you should find a `*.tar.gz` & `*.whl` packages.
+
+

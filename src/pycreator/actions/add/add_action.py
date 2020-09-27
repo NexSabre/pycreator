@@ -26,6 +26,7 @@ class AddAction(Action):
             Messages.warn(f"{new_action_name} action dir was not created")
             return False
         Messages.info(f"New action {new_action_name} was created")
+        Messages.info(f"Remember to import a '{new_action_name}' at 'actions_dispatcher.py'")
         return True
 
     @staticmethod
