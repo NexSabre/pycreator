@@ -20,9 +20,10 @@ class CreateAction(Action):
             exit(1)
         if not self.create_boilerplate(target_location, configuration.name):
             Messages.error(f"Some error occur. The pycreator does not create an application {configuration.name}"
-                           f"at {target_location}")
+                           f" at {target_location}")
+            return
         Messages.ok(f"The pycreator successfully create a new application {configuration.name}"
-                    f"at {target_location}")
+                    f" at {target_location}")
 
     @staticmethod
     def create_boilerplate(tgt_location: str, app_name: str):
