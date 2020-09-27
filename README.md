@@ -4,7 +4,7 @@ Create boilerplate application thru the command-line!
 ## TLDR; 
 ```
 pip install pycreator       # to install pycreator
-pycreator goes -n brrr      # where brr is the name
+pycreator goes brrr         # where brr is the name
 ```
 
 ## Usage
