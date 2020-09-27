@@ -56,6 +56,6 @@ Boilerplate app comes with preconfigured `setup.py` file which allow to create a
 To build a package, go to `src` dir a type in the terminal:
 ```
 pip install setuptools wheel
-python sdist bdist_wheel
+python setup.py sdist bdist_wheel
 ```
 After operation in the newly created dir `dist/` you should find a `*.tar.gz` & `*.whl` packages.
