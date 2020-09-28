@@ -1,7 +1,7 @@
-from typing import Tuple, Dict
-
+from pycreator.core.template import Template
 from pycreator.framework.messages import Messages
-
+import os
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 def get_internal_paths(app_name):
     return (
@@ -62,22 +62,21 @@ def create_pycreator_hook(location):
         pycreator_hook.write('')
 
 
-class Template:
-    def __init__(self, location: Tuple, dest_name: str, template_name: str, render_vars: Dict = None) -> None:
-        self.location = location
-        self.dest_name = dest_name
-        self.template_name = template_name
-        self.render_vars = render_vars if render_vars else {}
-
-
-def create_files_from_templates(location: str, app_name: str):
-    import os
-    from jinja2 import Environment, PackageLoader, select_autoescape
-    env = Environment(
+def get_env_object_for_templates() -> Environment:
+    return Environment(
         loader=PackageLoader('pycreator', 'templates'),
         autoescape=select_autoescape(['html', 'xml', 'j2'])
     )
 
+
+def create_files_from_templates(location: str, app_name: str) -> None:
+    """
+    Create all files to bare minimum of the template
+    :param location: absolute location of the final destination of the new Python project
+    :param app_name: name of the new project
+    :return: None
+    """
+    env = get_env_object_for_templates()
     files_per_template = (
         Template(("src", app_name), 'setup.py', 'setup.j2', {"creator_app_name": app_name}),
         Template(("src", app_name, "main"), "main.py", "main.j2", {"creator_app_name": app_name}),
@@ -100,14 +99,14 @@ def create_files_from_templates(location: str, app_name: str):
             new_file.write(template.render(**file_template.render_vars))
 
 
-def create_new_action(location_to_actions_dir: str, app_name: str):
-    import os
-    from jinja2 import Environment, PackageLoader, select_autoescape
-    env = Environment(
-        loader=PackageLoader('pycreator', 'templates'),
-        autoescape=select_autoescape(['html', 'xml', 'j2'])
-    )
-
+def create_new_action(location_to_actions_dir: str, app_name: str) -> bool:
+    """
+    Create a new action inside a actions directory
+    :param location_to_actions_dir: absolute path to the actions directory
+    :param app_name: action name
+    :return:
+    """
+    env = get_env_object_for_templates()
     file_template = Template((location_to_actions_dir, app_name), f"{app_name}.py", "action.j2",
                              {"creator_app_name": app_name,
                               "creator_class_name": f"{app_name[0].upper()}{app_name[1:]}Action",
