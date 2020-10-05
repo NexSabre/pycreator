@@ -24,9 +24,10 @@ class ActionDispatcher:
         try:
             self.action_handlers[configuration.ACTION].process_action(configuration)
         except AttributeError:
-            Messages.clean("pycreator")
+            Messages.clean(f"pycreator {ShowVersion.VERSION}")
             Messages.clean("quick tool to create a Python cmd boilerplate application\n")
             Messages.clean("Choose operation:"
                            "\n\t\t - create -- for creation a new package"
-                           "\n\t\t - goes   -- for brrrr")
+                           "\n\t\t - goes   -- for brrrr"
+                           "\n\t\t - add    -- add a new action into actions")
             Messages.clean("")

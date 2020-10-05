@@ -5,8 +5,10 @@ class ShowVersion(Action):
     ACTION = "version"
     PARAM_NAME = "ACTION"
 
+    VERSION = "v0.2.1"
+
     def fill_parser_arguments(self):
         pass
 
     def process_action(self, configuration):
-        print("pycreator: v0.2.1")
+        print(f"pycreator: {ShowVersion.VERSION}")
