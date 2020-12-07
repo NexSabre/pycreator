@@ -1,3 +1,5 @@
+[![PyPI version](https://badge.fury.io/py/pycreator.svg)](https://badge.fury.io/py/pycreator)
+
 # pycreator
 Create boilerplate application thru the command-line!
 
